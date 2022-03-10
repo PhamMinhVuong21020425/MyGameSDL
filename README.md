@@ -1,0 +1,2 @@
+# MyGameSDL
+Game C++ SDL
