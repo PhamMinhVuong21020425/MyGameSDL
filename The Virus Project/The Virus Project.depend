@@ -1,0 +1,179 @@
+# depslib dependency file v1.0
+1648916202 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\init.cpp
+	"Init.h"
+
+1648984922 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\init.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<windows.h>
+	<stdio.h>
+	<string>
+	<bits/stdc++.h>
+	<cstdlib>
+
+1648985847 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\main.cpp
+	"Init.h"
+	"LTexture.h"
+	"CharacterMove.h"
+	"Virus.h"
+	"Collision.h"
+	"TileMap.h"
+
+1648917136 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\ltexture.h
+	"Init.h"
+
+1648917136 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\ltexture.cpp
+	"LTexture.h"
+
+1648916395 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\charactermove.cpp
+	"CharacterMove.h"
+
+1648917361 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\charactermove.h
+	"Init.h"
+	"LTexture.h"
+	"Collision.h"
+
+1648984161 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\virus.h
+	"Init.h"
+	"LTexture.h"
+	"Collision.h"
+
+1648984751 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\virus.cpp
+	"Virus.h"
+
+1648542888 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\charactermove.cpp
+	"CharacterMove.h"
+
+1648542311 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\charactermove.h
+	"Init.h"
+	"LTexture.h"
+	"Collision.h"
+
+1648561524 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\init.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<windows.h>
+	<stdio.h>
+	<string>
+	<bits/stdc++.h>
+
+1648396004 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\ltexture.h
+	"Init.h"
+
+1648561524 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\init.cpp
+	"Init.h"
+
+1648402090 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\ltexture.cpp
+	"LTexture.h"
+
+1648543048 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\main.cpp
+	"Init.h"
+	"LTexture.h"
+	"CharacterMove.h"
+	"Virus.h"
+	"Collision.h"
+	"TileMap.h"
+
+1648542378 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\virus.h
+	"Init.h"
+	"LTexture.h"
+	"Collision.h"
+
+1648542768 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\virus.cpp
+	"Virus.h"
+
+1648279686 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\collision.cpp
+	"Collision.h"
+
+1648279697 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\collision.h
+	"Init.h"
+	"LTexture.h"
+	"CharacterMove.h"
+	"Virus.h"
+
+1648783225 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\collision.h
+	"Init.h"
+	"LTexture.h"
+	"CharacterMove.h"
+	"Virus.h"
+
+1648783225 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\collision.cpp
+	"Collision.h"
+
+1648823703 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\tilemap.cpp
+	"TileMap.h"
+
+1648823687 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus project\tilemap.h
+	"Init.h"
+	"LTexture.h"
+
+1648396004 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\tilemap.cpp
+	"TileMap.h"
+
+1648394148 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy\tilemap.h
+	"Init.h"
+	"LTexture.h"
+
+1648616180 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\charactermove.cpp
+	"CharacterMove.h"
+
+1648616180 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\charactermove.h
+	"Init.h"
+	"LTexture.h"
+	"Collision.h"
+
+1648610095 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\init.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<windows.h>
+	<stdio.h>
+	<string>
+	<bits/stdc++.h>
+
+1648396004 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\ltexture.h
+	"Init.h"
+
+1648574806 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\collision.h
+	"Init.h"
+	"LTexture.h"
+	"CharacterMove.h"
+	"Virus.h"
+
+1648616267 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\virus.h
+	"Init.h"
+	"LTexture.h"
+	"Collision.h"
+
+1648610681 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\collision.cpp
+	"Collision.h"
+
+1648561524 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\init.cpp
+	"Init.h"
+
+1648402090 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\ltexture.cpp
+	"LTexture.h"
+
+1648575115 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\tilemap.cpp
+	"TileMap.h"
+
+1648394148 c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\tilemap.h
+	"Init.h"
+	"LTexture.h"
+
+1648617124 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\virus.cpp
+	"Virus.h"
+
+1648617689 source:c:\users\pc\onedrive - vnu.edu.vn\desktop\the virus - copy - copy\main.cpp
+	"Init.h"
+	"LTexture.h"
+	"CharacterMove.h"
+	"Virus.h"
+	"Collision.h"
+	"TileMap.h"
+
