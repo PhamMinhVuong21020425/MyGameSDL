@@ -5,19 +5,16 @@
 #include "Collision.h"
 #include "TileMap.h"
 
-int main( int argc, char* argv[] )
+int main( int argc, char* args[] )
 {
     //create rand seed
-    srand((int)time(NULL));
+    srand((unsigned int)time(NULL));
 
     //The window we'll be rendering to
     SDL_Window* gWindow = NULL;
 
     //The window renderer
     SDL_Renderer* gRenderer = NULL;
-
-    //Current displayed texture
-    SDL_Texture* gTexture = NULL;
 
     //Start up SDL and create window
     if( !init( gWindow, gRenderer) )
@@ -27,58 +24,43 @@ int main( int argc, char* argv[] )
     else
     {
         Mix_Music *gMusic = Mix_LoadMUS("sound/cutesong.mp3");
-        if( gMusic == NULL )
-		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
-		Mix_PlayMusic( gMusic, -1 );
+        if( gMusic == NULL ) printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+        Mix_PlayMusic( gMusic, -1 );
 
+        Uint32 score = 0;
         welcome(gRenderer);
-        TileMap GameMap;
+        TileMap GameMap(gRenderer);
+
+        Wall newWall;
+        int wall_X = SCREEN_WIDTH / 2 + 10, wall_Y = SCREEN_HEIGHT / 2 - 10;
+        newWall.createWall(gRenderer);
 
         character chr;
-        Virus virus;
-        SDL_Rect wall = {600,0,50,SCREEN_HEIGHT};
+        chr.loadFromFile("image/Sprite.png", gRenderer);
 
-        SDL_Rect gSpriteClips[ ANIMATION_FRAMES ];
-        SDL_Rect gVirusClips[2];
+        Virus LeftVirus[NUM_VIRUS];
+        Virus *virus = new Virus();
+        virus = LeftVirus;
 
-        chr.loadCharacter(gRenderer);
-        virus.loadVirus(gRenderer);
+        Virus RightVirus[NUM_VIRUS];
+        Virus *gVirus = new Virus();
+        gVirus = RightVirus;
 
-        //Set sprite clips character
-        gSpriteClips[0].x = 0;
-        gSpriteClips[0].y = 166;
-        gSpriteClips[0].w = 55; //165
-        gSpriteClips[0].h = 83;//332
-
-        gSpriteClips[1].x = 55;
-        gSpriteClips[1].y = 166;
-        gSpriteClips[1].w = 55;
-        gSpriteClips[1].h = 83;
-
-        gSpriteClips[2].x = 110;
-        gSpriteClips[2].y = 166;
-        gSpriteClips[2].w = 55;
-        gSpriteClips[2].h = 83;
-
-        //Set sprite clips Virus
-        gVirusClips[0].x = 0;
-        gVirusClips[0].y = 0;
-        gVirusClips[0].w = 52;
-        gVirusClips[0].h = 56;
-
-        gVirusClips[1].x = 52;
-        gVirusClips[1].y = 0;
-        gVirusClips[1].w = 52;
-        gVirusClips[1].h = 56;
+        for(int i = 0; i < NUM_VIRUS; i++)
+        {
+            (virus + i)->loadFromFile("image/CovidOther.png", gRenderer);
+            (gVirus + i)->loadFromFile("image/CovidRed.png", gRenderer);
+            (gVirus + i)->setPos(SCREEN_WIDTH + rand()%300, 0);
+        }
 
         //Main loop flag
         bool quit = false;
         bool gameOver = false;
+
         //Event handler
         SDL_Event e;
 
-        int frChr = 0, frVirus = 0;
-        bool checkMove;
+        Uint32 startTime = SDL_GetTicks();
 
         //While application is running
         while( !quit )
@@ -89,88 +71,72 @@ int main( int argc, char* argv[] )
                 //User requests quit
                 if( e.type == SDL_QUIT ) quit = true;
 
-                //Handle Music
-                else if( e.type == SDL_KEYDOWN )
+                //Handle input for character
+                chr.handleEvent( e, gMusic );
+                if(e.type == SDL_KEYDOWN)
                 {
-                    switch( e.key.keysym.sym )
+                    switch(e.key.keysym.sym)
                     {
-                    case SDLK_m:
-                        //If there is no music playing
-                        if( Mix_PlayingMusic() == 0 )
-                        {
-                            //Play the music
-                            Mix_PlayMusic( gMusic, -1 );
-                        }
-                        //If music is being played
-                        else
-                        {
-                            //If the music is paused
-                            if( Mix_PausedMusic() == 1 )
-                            {
-                                //Resume the music
-                                Mix_ResumeMusic();
-                            }
-                            //If the music is playing
-                            else
-                            {
-                                //Pause the music
-                                Mix_PauseMusic();
-                            }
-                        }
-                        break;
+                    case SDLK_a: wall_X = chr.getPosX() - 33; wall_Y = chr.getPosY() + 25; break;
+                    case SDLK_d: wall_X = chr.getPosX() + 35; wall_Y = chr.getPosY() + 25; break;
+                    default: break;
 
-                    case SDLK_0:
-                        //Stop the music
-                        Mix_HaltMusic();
-                        break;
                     }
                 }
-
-                //Handle input for character
-                chr.handleEvent( e, checkMove );
             }
 
+            chr.move();
+            newWall.wallCollider = {wall_X, wall_Y - 10, 20, 40};
 
-            virus.move(wall);
-            chr.move(virus.Covid, gameOver);
+            for(int i = 0; i < NUM_VIRUS; i++)
+            {
+                //SDL_Rect wall = { 0,0,50,SCREEN_HEIGHT};
+                (virus+i)->move(newWall.wallCollider,chr.mColliders,gameOver);
 
+                //SDL_Rect wallRToL = {SCREEN_WIDTH,0,50,SCREEN_HEIGHT};
+                (gVirus+i)->move(newWall.wallCollider,chr.mColliders,gameOver);
+            }
 
             //Clear screen
-            SDL_SetRenderDrawColor(gRenderer, 0, 255, 0, 0);
+            SDL_SetRenderDrawColor(gRenderer, 0, 191, 240, 0);
             SDL_RenderClear( gRenderer );
 
             //Draw map
-            GameMap.loadTiles(gRenderer);
             GameMap.drawMap(gRenderer);
 
-            SDL_Rect* currentClip = &gSpriteClips[frChr/9];
-            chr.renderCharacter(gRenderer, currentClip);
+            //Render object
+            for(int i = 0; i < NUM_VIRUS; i++)
+            {
+                (virus+i)->renderVirus(gRenderer);
+                (gVirus + i)->renderVirus(gRenderer);
+            }
 
-            SDL_Rect* virusClip = &gVirusClips[frVirus/11];
-            virus.renderVirus(gRenderer, virusClip);
+            chr.renderCharacter( gRenderer );
+            newWall.renderWall(gRenderer, wall_X, wall_Y);
+
+            score = (SDL_GetTicks() - startTime) / 100;
+            renderScore(gRenderer,score);
 
             //Update screen
             SDL_RenderPresent( gRenderer );
 
-            if(checkMove == true) frChr++;
-            else while(frChr/9 < 1)frChr++;
-            if(frChr/9 >= ANIMATION_FRAMES) frChr = 0;
-
-            frVirus++;
-            if(frVirus/11 >= 2) frVirus = 0;
-
             if(gameOver == true)
             {
-                GameOver(gRenderer);
+                SDL_Delay(1000);
+                SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+                SDL_RenderClear(gRenderer);
+                GameOver(gRenderer,score);
                 Mix_FreeMusic( gMusic );
-	            gMusic = NULL;
+                gMusic = NULL;
                 quit = true;
             }
         }
+        if(virus != nullptr) virus = nullptr;
+        if(gVirus != nullptr) gVirus = nullptr;
     }
 
     //Free resources and close SDL
-    close(gWindow, gRenderer, gTexture);
+    close(gWindow, gRenderer);
 
     return 0;
 }
